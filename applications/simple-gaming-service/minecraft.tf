@@ -34,10 +34,6 @@ module "minecraft" {
        value = "Welcome to the 2d6 Minecraft server"
     },
     {
-       name = "WHITELIST",
-       value = "jolinarlorian"
-    },
-    {
       name = "PVP"
       value = "false"
     }

@@ -33,6 +33,10 @@ module "tf2" {
     {
        name = "SRCDS_TOKEN",
        value = "6569DBE19DB7DF9072B5D3E1D568F608"
+    },
+    {
+       name = "DLURL",
+       value = "https://raw.githubusercontent.com/joedwards32/2d6-terraform/master/applications/simple-gaming-service/tf2/"
     }
   ]
 }

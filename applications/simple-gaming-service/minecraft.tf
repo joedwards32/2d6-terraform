@@ -11,6 +11,7 @@ resource "aws_efs_file_system" "minecraft" {
 
 #\\ PERSISTENT STORAGE - DO NOT DELETE!
 
+/*
 module "minecraft" {
   source = "../../modules/simple_gaming_service_task"
   name = "minecraft"
@@ -64,3 +65,4 @@ output "minecraft_ecs_service_id" {
 output "minecraft_dns_name" {
   value = module.minecraft.dns_name
 }
+*/

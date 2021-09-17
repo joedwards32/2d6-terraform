@@ -1,6 +1,5 @@
 # TF2 Simple Gaming Service Task
 # =========================================================
-/*
 module "tf2" {
   source = "../../modules/simple_gaming_service_task"
   name = "tf2"
@@ -35,6 +34,10 @@ module "tf2" {
        value = "6569DBE19DB7DF9072B5D3E1D568F608"
     },
     {
+       name = "SRCDS_MAXPLAYERS",
+       value = "24"
+    },
+    {
        name = "DLURL",
        value = "https://raw.githubusercontent.com/joedwards32/2d6-terraform/master/applications/simple-gaming-service/tf2/"
     }
@@ -48,4 +51,3 @@ output "tf2_ecs_service_id" {
 output "tf2_dns_name" {
   value = module.tf2.dns_name
 }
-*/

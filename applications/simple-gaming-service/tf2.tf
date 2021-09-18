@@ -1,5 +1,6 @@
 # TF2 Simple Gaming Service Task
 # =========================================================
+/*
 module "tf2" {
   source = "../../modules/simple_gaming_service_task"
   name = "tf2"
@@ -51,3 +52,4 @@ output "tf2_ecs_service_id" {
 output "tf2_dns_name" {
   value = module.tf2.dns_name
 }
+*/

@@ -35,7 +35,7 @@ module "csgo" {
     },
     {
        name = "SRCDS_TOKEN",
-       value = "FA5DCB0996260524F5D26B1A98E12AC9"
+       value = "4B162EA4DA2C0BED1FF3488B0B8C677D"
     },
     {
        name = "SRCDS_GAMETYPE",

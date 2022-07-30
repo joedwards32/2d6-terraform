@@ -48,7 +48,12 @@ module "csgo" {
     {
        name = "SRCDS_STARTMAP",
        value = "de_dust2"
+    },
+    {
+       name = "DLURL",
+       value = "https://raw.githubusercontent.com/joedwards32/2d6-terraform/master/applications/simple-gaming-service/csgo/"
     }
+
   ]
 }
 

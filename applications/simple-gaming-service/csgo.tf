@@ -43,11 +43,15 @@ module "csgo" {
     },
     {
        name = "SRCDS_GAMEMODE",
-       value = 0
+       value = 1
     },
     {
        name = "SRCDS_STARTMAP",
        value = "de_dust2"
+    },
+    {
+       name = "SRCDS_MAXPLAYERS",
+       value = 20
     },
     {
        name = "DLURL",

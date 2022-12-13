@@ -50,6 +50,10 @@ module "csgo" {
        value = "de_dust2"
     },
     {
+       name = "SRCDS_MAXPLAYERS",
+       value = 20
+    },
+    {
        name = "DLURL",
        value = "https://raw.githubusercontent.com/joedwards32/2d6-terraform/master/applications/simple-gaming-service/csgo/"
     }

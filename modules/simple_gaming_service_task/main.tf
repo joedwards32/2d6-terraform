@@ -1,3 +1,9 @@
+# Process docker image tag, apply ':latest' tag if no tag is defined
+locals {
+  image_tag = split(":", "${var.container_image}")
+  container_image = length(local.image_tag) > 1 ? join("", [local.image_tag[0], ":", local.image_tag[1]]) : join("", [local.image_tag[0], ":latest"])
+}
+
 # Create Cloudwatch log group
 
 resource "aws_cloudwatch_log_group" "task" {
@@ -62,7 +68,7 @@ resource "aws_ecs_task_definition" "task" {
   }
   container_definitions = jsonencode([{
    name         = "${var.name}-container"
-   image        = "${var.container_image}:latest"
+   image        = "${local.container_image}"
    essential    = true
    portMappings = "${var.port_mappings}"
    environment  = "${var.environment_variables}"

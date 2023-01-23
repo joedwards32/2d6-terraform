@@ -4,7 +4,7 @@
 module "csgo-oitc" {
   source = "../../modules/simple_gaming_service_task"
   name = "csgo-oitc"
-  container_image = "cm2network/csgo"
+  container_image = "cm2network/csgo:sourcemod"
   cpu = 1024
   memory = 2048
   disk = 40
@@ -35,7 +35,7 @@ module "csgo-oitc" {
     },
     {
        name = "SRCDS_TOKEN",
-       value = "F142BAD0723A0AF43E7619F1170DE305"
+       value = "816AA4F3BB87F25AFE0445A384028F45"
     },
     {
        name = "SRCDS_GAMETYPE",

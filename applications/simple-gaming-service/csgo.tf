@@ -51,11 +51,19 @@ module "csgo" {
     },
     {
        name = "SRCDS_MAXPLAYERS",
-       value = 20
+       value = 10
     },
     {
        name = "DLURL",
        value = "https://raw.githubusercontent.com/joedwards32/2d6-terraform/master/applications/simple-gaming-service/csgo/"
+    },
+    {
+       name = "SRCDS_FPSMAX",
+       value = 300
+    },
+    {
+       name = "SRCDS_TICKRATE",
+       value = 128
     }
 
   ]

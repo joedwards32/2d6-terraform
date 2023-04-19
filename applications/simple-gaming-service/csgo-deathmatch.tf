@@ -47,11 +47,11 @@ module "csgo" {
     },
     {
        name = "SRCDS_STARTMAP",
-       value = "de_dust2"
+       value = "de_inferno"
     },
     {
        name = "SRCDS_MAXPLAYERS",
-       value = 10
+       value = 20
     },
     {
        name = "DLURL",

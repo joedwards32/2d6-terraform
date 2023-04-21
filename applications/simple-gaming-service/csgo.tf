@@ -43,7 +43,7 @@ module "csgo" {
     },
     {
        name = "SRCDS_GAMEMODE",
-       value = 0
+       value = 1
     },
     {
        name = "SRCDS_STARTMAP",

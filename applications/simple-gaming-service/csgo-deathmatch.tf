@@ -1,9 +1,9 @@
 # CS:GO Simple Gaming Service Task
 # =========================================================
 /*
-module "csgo" {
+module "csgo-dm" {
   source = "../../modules/simple_gaming_service_task"
-  name = "csgo"
+  name = "csgo-dm"
   container_image = "cm2network/csgo"
   cpu = 1024
   memory = 2048
@@ -69,11 +69,11 @@ module "csgo" {
   ]
 }
 
-output "csgo_ecs_service_id" {
-  value = module.csgo.ecs_service_id
+output "csgo-dm_ecs_service_id" {
+  value = module.csgo-dm.ecs_service_id
 }
 
-output "csgo_dns_name" {
-  value = module.csgo.dns_name
+output "csgo-dm_dns_name" {
+  value = module.csgo-dm.dns_name
 }
 */

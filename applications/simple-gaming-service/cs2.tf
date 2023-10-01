@@ -1,7 +1,6 @@
 # CS2 Simple Gaming Service Task
 # =========================================================
 
-/*
 variable "cs2_steamuser" {
   type = string
 }
@@ -17,6 +16,8 @@ variable "cs2_pw" {
 variable "cs2_rconpw" {
 	  type = string
 }
+
+/*
 
 module "cs2" {
   source = "../../modules/simple_gaming_service_task"
@@ -64,7 +65,7 @@ module "cs2" {
     },
     {
        name = "CS2_GAMEMODE",
-       value = 0
+       value = 1
     },
     {
        name = "CS2_STARTMAP",
@@ -73,7 +74,19 @@ module "cs2" {
     {
        name = "CS2_MAXPLAYERS",
        value = 16
-    }
+    },
+    {
+       name = "CS2_BOT_DIFFICULTY",
+       value = 2
+    },
+    {
+       name = "CS2_BOT_QUOTA",
+       value = 10
+    },
+    {
+       name = "CS2_BOT_QUOTA_MODE",
+       value = "fill"
+    },
   ]
 }
 

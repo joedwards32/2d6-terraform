@@ -17,15 +17,23 @@ variable "cs2_rconpw" {
 	  type = string
 }
 
-/*
+#// PERSISTENT STORAGE - DO NOT DELETE!
+
+resource "aws_efs_file_system" "cs2" {
+  throughput_mode = "elastic"
+  tags = {
+    Name = "cs2"
+  }
+}
+
+#\\ PERSISTENT STORAGE - DO NOT DELETE!
 
 module "cs2" {
   source = "../../modules/simple_gaming_service_task"
   name = "cs2"
   container_image = "joedwards32/cs2"
-  cpu = 1024
+  cpu = 2048
   memory = 4096
-  disk = 40
   dns_zone = "2d6.club"
   sgs_cluster_id = module.sgs_cluster.id  
   logging_region = var.region
@@ -68,12 +76,8 @@ module "cs2" {
        value = 1
     },
     {
-       name = "CS2_STARTMAP",
-       value = "de_dust2"
-    },
-    {
        name = "CS2_MAXPLAYERS",
-       value = 16
+       value = 10
     },
     {
        name = "CS2_BOT_DIFFICULTY",
@@ -88,6 +92,20 @@ module "cs2" {
        value = "fill"
     },
   ]
+  efs_file_systems = [
+    {
+      name                = aws_efs_file_system.cs2.tags_all.Name
+      efs_file_system_id  = aws_efs_file_system.cs2.id
+      mount_point         = "/cs2-dedicated/"
+    }
+  ]
+  mount_points = [
+    {
+      containerPath       = "/home/steam/cs2-dedicated/"
+      sourceVolume        = aws_efs_file_system.cs2.tags_all.Name
+    }
+  ]
+
 }
 
 output "cs2_ecs_service_id" {
@@ -97,4 +115,3 @@ output "cs2_ecs_service_id" {
 output "cs2_dns_name" {
   value = module.cs2.dns_name
 }
-*/

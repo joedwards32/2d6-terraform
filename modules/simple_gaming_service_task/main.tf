@@ -14,46 +14,6 @@ resource "aws_cloudwatch_log_group" "task" {
   }
 }
 
-# Create Targets for EFS file systems 
-resource "aws_security_group" "efs" {
-  name        = "sgs-efs-${var.name}"
-  description = "Control EFS traffic for SGS task ${var.name}"
-}
-
-resource "aws_security_group_rule" "efs_ingress" {
-  security_group_id        = aws_security_group.efs.id
-  type                     = "ingress"
-  from_port                = 2049
-  to_port                  = 2049
-  protocol                 = "TCP"
-  source_security_group_id = aws_security_group.task.id
-}
-
-## TODO - Turn this into a nice loop over a merged map
-resource "aws_efs_mount_target" "subneta" {
-  for_each = { for fs in var.efs_file_systems: fs.name => fs }
-  
-  file_system_id  = each.value.efs_file_system_id
-  subnet_id       = local.subnet_ids[0]
-  security_groups = [aws_security_group.efs.id] 
-}
-
-resource "aws_efs_mount_target" "subnetb" {
-  for_each = { for fs in var.efs_file_systems: fs.name => fs }
-  
-  file_system_id  = each.value.efs_file_system_id
-  subnet_id       = local.subnet_ids[1]
-  security_groups = [aws_security_group.efs.id] 
-}
-
-resource "aws_efs_mount_target" "subnetc" {
-  for_each = { for fs in var.efs_file_systems: fs.name => fs }
-  
-  file_system_id  = each.value.efs_file_system_id
-  subnet_id       = local.subnet_ids[2]
-  security_groups = [aws_security_group.efs.id] 
-}
-
 # Define ECS task
 
 resource "aws_ecs_task_definition" "task" {
@@ -122,11 +82,24 @@ resource "aws_security_group_rule" "egress" {
   ipv6_cidr_blocks  = ["::/0"]
 }
 
+# Define EFS Access Point
+resource "aws_efs_access_point" "task" {
+  for_each = { for fs in var.efs_file_systems: fs.name => fs }
+  file_system_id = each.value.efs_file_system_id
+  root_directory {
+    path = each.value.mount_point
+    creation_info {
+      owner_uid = 65534
+      owner_gid = 65534
+      permissions = "0777"
+    }
+  }
+}
+
 # Define ECS Service
 
 resource "aws_ecs_service" "task" {
-  # depends_on required to ensure that efs mount points exist before container started
-  depends_on = [aws_efs_mount_target.subneta, aws_efs_mount_target.subnetb, aws_efs_mount_target.subnetc]
+  depends_on = [aws_efs_access_point.task]
   name            = var.name
   launch_type     = "FARGATE"
   cluster         = var.sgs_cluster_id
@@ -136,7 +109,7 @@ resource "aws_ecs_service" "task" {
   network_configuration {
     subnets = local.subnet_ids
     assign_public_ip = true
-    security_groups = [aws_security_group.task.id]
+    security_groups = compact([aws_security_group.task.id, var.efs_client_security_group_id])
   }
 }
 

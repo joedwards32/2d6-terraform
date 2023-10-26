@@ -13,6 +13,12 @@ variable "sgs_cluster_id" {
   type        = string
 }
 
+variable "efs_client_security_group_id" {
+  description = "Security Group ID for EFS Clients"
+  type        = string
+  default     = null
+}
+
 variable "cpu" {
   description = "Fargate CPU units"
   type        = number

@@ -10,7 +10,7 @@ locals {
 
 # S3 static site 
 module "www" {
-  source                       = "../../../tf-modules/static-site/"
+  source                       = "github.com/joedwards32/s3-static-site"
   dns_zone                     = "2d6.club" 
   site_name                    = "www"
   site_files                   = "../../../2d6-www/public/"

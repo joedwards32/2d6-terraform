@@ -1,19 +1,9 @@
 # Minecraft Simple Gaming Service Task
 # =========================================================
 
-#// PERSISTENT STORAGE - DO NOT DELETE!
-
-resource "aws_efs_file_system" "minecraft" {
-  tags = {
-    Name = "minecraft"
-  }
-}
-
-#\\ PERSISTENT STORAGE - DO NOT DELETE!
-
 /*
 module "minecraft" {
-  source = "../../modules/simple_gaming_service_task"
+  source = "github.com/joedwards32/sgs-task"
   name = "minecraft"
   container_image = "itzg/minecraft-server"
   cpu = 1024

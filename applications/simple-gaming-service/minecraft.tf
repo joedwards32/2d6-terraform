@@ -3,7 +3,7 @@
 
 /*
 module "minecraft" {
-  source = "../../modules/simple_gaming_service_task"
+  source = "github.com/joedwards32/sgs-task"
   name = "minecraft"
   container_image = "itzg/minecraft-server"
   cpu = 1024

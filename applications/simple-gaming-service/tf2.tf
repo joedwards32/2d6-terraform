@@ -2,7 +2,7 @@
 # =========================================================
 /*
 module "tf2" {
-  source = "../../modules/simple_gaming_service_task"
+  source = "github.com/joedwards32/sgs-task"
   name = "tf2"
   container_image = "cm2network/tf2"
   dns_zone = "2d6.club"

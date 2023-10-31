@@ -14,25 +14,30 @@ variable "cs2_pw" {
 }
 
 variable "cs2_rconpw" {
-	  type = string
+  type = string
 }
 
 /*
 module "cs2" {
-  source = "../../modules/simple_gaming_service_task"
+  source = "github.com/joedwards32/sgs-task"
   name = "cs2"
   container_image = "joedwards32/cs2"
+  sgs_cluster = module.sgs_cluster
+  running = true
   cpu = 2048
   memory = 4096
   dns_zone = "2d6.club"
-  sgs_cluster_id = module.sgs_cluster.id
   logging_region = var.region
-  execution_role_arn = module.sgs_cluster.execution_role_arn
   port_mappings = [
     {
        hostPort = 27015,
        containerPort = 27015
        protocol = "udp"
+    },
+    {
+       hostPort = 27016,
+       containerPort = 27016
+       protocol = "tcp"
     },
     {
        hostPort = 27020,
@@ -58,6 +63,10 @@ module "cs2" {
        value = var.cs2_rconpw
     },
     {
+       name = "CS2_RCON_PORT",
+       value = 27016
+    },
+    {
        name = "CS2_GAMETYPE",
        value = 0
     },
@@ -67,7 +76,7 @@ module "cs2" {
     },
     {
        name = "CS2_MAXPLAYERS",
-       value = 10
+       value = 11
     },
     {
        name = "CS2_BOT_DIFFICULTY",
@@ -75,18 +84,24 @@ module "cs2" {
     },
     {
        name = "CS2_BOT_QUOTA",
-       value = 10
+       value = 11
     },
     {
        name = "CS2_BOT_QUOTA_MODE",
-       value = "fill"
+       value = "normal"
+    },
+    {
+       name = "TV_PW",
+       value = ""
+    },
+    {
+       name = "TV_ENABLE",
+       value = 1
     },
   ]
-  efs_client_security_group_id = module.sgs_cluster.efs_clients_security_group_id
-  efs_file_systems = [
+  volumes = [
     {
       name                = "cs2"
-      efs_file_system_id  = module.sgs_cluster.efs
       mount_point         = "/cs2-dedicated"
     }
   ]

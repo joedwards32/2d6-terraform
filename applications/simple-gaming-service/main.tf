@@ -4,6 +4,6 @@
 
 # SGS cluster 
 module "sgs_cluster" {
-  source = "../../modules/simple_gaming_service_cluster"
+  source = "github.com/joedwards32/sgs-cluster"
   name = "2d6"
 }
